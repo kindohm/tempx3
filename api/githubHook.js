@@ -1,2 +1,2 @@
 var hookshot = require('hookshot');
-hookshot('refs/heads/master', 'git pull && yarn deploy:hook').listen(3333)
+hookshot('refs/heads/master', 'git pull && yarn deploy:update').listen(3333)

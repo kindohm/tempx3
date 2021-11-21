@@ -18,7 +18,9 @@
   "scripts": {
     "start": "yarn nodemon index.js",
     "deploy": "yarn && yarn pm2 start index.js",
-    "deploy:hook": "yarn && yarn pm2 restart index.js",
-    "deploy:stop": "yarn pm2 stop index.js && yarn pm2 delete index.js"
+    "deploy:update": "yarn && yarn pm2 restart index.js",
+    "deploy:stop": "yarn pm2 stop index.js && yarn pm2 delete index.js",
+    "hook:start": "yarn pm2 start githubHook.js",
+    "hook:stop": "yarn pm2 stop githubHook.js && yarn pm2 delete githubHook.js"
   }
 }
