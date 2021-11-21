@@ -12,6 +12,7 @@ const postReading = async (temperature) => {
 
 const measureAndPost = async () => {
   try {
+    console.log('measuring and posting...');
     const temperature = await getTemperatureReading();
     const result = await postReading(temperature);
     console.log("success");
@@ -19,8 +20,10 @@ const measureAndPost = async () => {
   } catch (err) {
     console.error("Error measuring temperature or posting reading");
     console.error(err);
+  } finally {
+    setTimeout(measureAndPost, postInterval);
   }
 };
 
 console.log("running");
-setInterval(measureAndPost, postInterval);
+setTimeout(measureAndPost, postInterval);
