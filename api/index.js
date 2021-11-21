@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const { Sequelize } = require("sequelize");
+const readingModel = require("./models/reading");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -14,7 +15,28 @@ const sequelize = new Sequelize(
   }
 );
 
-app.get("/", async (req, res) => {
+const Reading = readingModel(sequelize, Sequelize.DataTypes);
+
+app.use(express.json());
+
+app.get("/readings", async (req, res) => {
+  const readings = await Reading.findAll();
+  res.send(readings);
+});
+
+app.post("/readings", async (req, res) => {
+  const { body } = req;
+  const { temperature } = body;
+  if (!temperature) {
+    res.status(400).send({message: 'temperature attribute is required.'})
+    return;
+  }
+
+  const reading = await Reading.create({ temperature });
+  res.json(reading);
+});
+
+app.get("/test", async (req, res) => {
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
@@ -24,7 +46,6 @@ app.get("/", async (req, res) => {
     res.send("error " + JSON.stringify(error));
   }
 });
-
 
 app.listen(port, () => {
   console.log(`API listening on ${port}`);

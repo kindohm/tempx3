@@ -16,11 +16,13 @@
     "nodemon": "2.0.15"
   },
   "scripts": {
-    "start": "yarn nodemon index.js",
-    "deploy": "yarn && yarn pm2 start index.js",
-    "deploy:update": "yarn && yarn pm2 restart index.js",
+    "start": "yarn run migrate && nodemon index.js",
+    "deploy": "yarn && yarn run migrate:server && yarn pm2 start index.js",
+    "deploy:update": "yarn && yarn run migrate:server && yarn pm2 restart index.js",
     "deploy:stop": "yarn pm2 stop index.js && yarn pm2 delete index.js",
     "hook:start": "yarn pm2 start githubHook.js",
-    "hook:stop": "yarn pm2 stop githubHook.js && yarn pm2 delete githubHook.js"
+    "hook:stop": "yarn pm2 stop githubHook.js && yarn pm2 delete githubHook.js",
+    "migrate": "yarn sequelize-cli db:migrate",
+    "migrate:server": "yarn run migrate --config ~/sequelize.json"
   }
 }
