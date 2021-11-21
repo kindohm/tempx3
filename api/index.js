@@ -1,7 +1,8 @@
 require("dotenv").config();
+const cors = require('cors');
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5150;
 const { Sequelize } = require("sequelize");
 const readingModel = require("./models/reading");
 
@@ -17,6 +18,11 @@ const sequelize = new Sequelize(
 
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
+const corsOptions = {
+  origin: 'http://localhost:3000'
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/readings", async (req, res) => {
