@@ -6,7 +6,10 @@ const App = () => {
 
   useEffect(() => {
     const getReadings = async () => {
-      const response = await axios.get("http://localhost:5150/readings");
+      const apiUrl = process.env.REACT_APP_API_URL;
+      console.log('apiUrl', apiUrl);
+      const route = `${apiUrl}/readings`;
+      const response = await axios.get(route);
       setReadings(response.data);
     };
     getReadings();
