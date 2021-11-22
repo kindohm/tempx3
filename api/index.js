@@ -19,7 +19,7 @@ const sequelize = new Sequelize(
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost']
+  origin: ['http://localhost:3000', 'http://localhost:5151']
 }
 
 app.use(cors(corsOptions));
