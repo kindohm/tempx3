@@ -5,5 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "hookshot": "^0.1.0"
+  },
+  "scripts": {
+    "startall": "cd ../api && yarn run deploy && cd ../frontend && yarn run deploy",
+    "stopall": "cd ../api && yarn run deploy:stop && cd ../frontend && yarn run deploy:stop"
   }
 }
