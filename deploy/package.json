@@ -1,0 +1,9 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "hookshot": "^0.1.0"
+  }
+}
