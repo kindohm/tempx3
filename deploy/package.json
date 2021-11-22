@@ -7,10 +7,6 @@
     "hookshot": "^0.1.0"
   },
   "scripts": {
-    "starthook": "pm2 start githubHook.js --name deployhook",
-    "startall": "cd ../api && yarn run deploy && cd ../frontend && yarn run deploy",
-    "stopall": "pm2 stop frontend && pm2 stop api",
-    "deleteall": "pm2 delete frontend && pm2 delete api",
-    "restartall": "pm2 restart frontend && pm2 restart api"
+    "starthook": "pm2 start githubHook.js --name deployhook"
   }
 }
