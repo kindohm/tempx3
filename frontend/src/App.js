@@ -6,6 +6,7 @@ const App = () => {
 
   useEffect(() => {
     const getReadings = async () => {
+      console.log('everything', process.env);
       const apiUrl = process.env.REACT_APP_API_URL;
       console.log('apiUrl', apiUrl);
       const route = `${apiUrl}/readings`;
