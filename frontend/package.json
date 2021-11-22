@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "yarn && yarn run build && yarn pm2 start \"http-server build -p 5151\" --name frontend",
-    "deploy:update": "yarn && yarn run build && yarn pm2 restart frontend",
+    "deploy:update": "yarn && yarn run build && yarn pm2 restart frontend"
   },
   "eslintConfig": {
     "extends": [
