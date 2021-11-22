@@ -8,6 +8,8 @@
   },
   "scripts": {
     "startall": "cd ../api && yarn run deploy && cd ../frontend && yarn run deploy",
-    "stopall": "cd ../api && yarn run deploy:stop && cd ../frontend && yarn run deploy:stop"
+    "stopall": "pm2 stop frontend && pm2 stop api",
+    "deleteall": "pm2 delete frontend && pm2 delete api",
+    "restartall": "pm2 restart frontend && pm2 restart api"
   }
 }
