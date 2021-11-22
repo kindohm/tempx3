@@ -9,4 +9,3 @@ docker-compose up
 yarn
 yarn run start
 ```
-
