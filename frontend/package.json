@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn && yarn run build",
+    "deploy": "yarn && yarn run build && cp ./build/* /var/www/html/",
     "hook:start": "yarn pm2 start githubHook.js --name frontendGithubHook",
     "hook:stop": "yarn pm2 stop githubHook.js && yarn pm2 delete frontendGithubHook"
   },
