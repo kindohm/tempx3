@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0",
+    "bme280-sensor": "^0.1.7",
     "dotenv": "^10.0.0",
     "pm2": "^5.1.2"
   },

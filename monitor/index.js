@@ -1,21 +1,21 @@
 require("dotenv").config();
 const axios = require("axios");
-const { getTemperatureReading } = require("./getTemperatureReading");
+const { getReadings } = require("./getReadings");
 const postUrl = process.env.POST_URL;
 const postInterval = process.env.INTERVAL;
 
-const postReading = async (temperature) => {
-  const payload = { temperature };
-  const result = await axios.post(postUrl, payload);
+const postReadings = async (data) => {
+  const result = await axios.post(postUrl, data);
   return result.data;
 };
 
 const measureAndPost = async () => {
   try {
-    console.log('measuring and posting...');
-    const temperature = await getTemperatureReading();
-    const result = await postReading(temperature);
-    console.log("success");
+    console.log(`--- taking readings ${(new Date).toISOString()} ---`);
+    const readings = await getReadings();
+    console.log(readings)
+    const result = await postReadings(readings);
+    console.log("posted readings to API");
     console.log(result);
   } catch (err) {
     console.error("Error measuring temperature or posting reading");

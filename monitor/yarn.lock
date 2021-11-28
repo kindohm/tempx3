@@ -187,10 +187,24 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
+bindings@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
+  dependencies:
+    file-uri-to-path "1.0.0"
+
 blessed@0.1.81:
   version "0.1.81"
   resolved "https://registry.yarnpkg.com/blessed/-/blessed-0.1.81.tgz#f962d687ec2c369570ae71af843256e6d0ca1129"
   integrity sha1-+WLWh+wsNpVwrnGvhDJW5tDKESk=
+
+bme280-sensor@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/bme280-sensor/-/bme280-sensor-0.1.7.tgz#39cef5cb0f8d4dfba3e2c037e8f6a412e9af0ddb"
+  integrity sha512-8+ss7jXMpRUUaR6bJWcvCt1bwdNqcusGjQtsuSqh5xTEZhJocDX21eo/j1g0zVZW9WEn4JAGNXyGwKTx4/Dj+A==
+  dependencies:
+    i2c-bus "^5.1.0"
 
 bodec@^0.1.0:
   version "0.1.0"
@@ -429,6 +443,11 @@ fclone@1.0.11, fclone@~1.0.11:
   resolved "https://registry.yarnpkg.com/fclone/-/fclone-1.0.11.tgz#10e85da38bfea7fc599341c296ee1d77266ee640"
   integrity sha1-EOhdo4v+p/xZk0HClu4ddyZu5kA=
 
+file-uri-to-path@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
+  integrity sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
+
 file-uri-to-path@2:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-2.0.0.tgz#7b415aeba227d575851e0a5b0c640d7656403fba"
@@ -563,6 +582,14 @@ https-proxy-agent@5, https-proxy-agent@^5.0.0:
   dependencies:
     agent-base "6"
     debug "4"
+
+i2c-bus@^5.1.0:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/i2c-bus/-/i2c-bus-5.2.2.tgz#0c727f5e99443c5734b4f0e05b45748ba85008fa"
+  integrity sha512-b2y/et08rqggEjqod6QxV0Ng+RlSkZXsdE+E1aZEQBahepZ9uFD9XfA77Y8O9SgyhwfGEn+CNxsw0gvXW1/m4g==
+  dependencies:
+    bindings "^1.5.0"
+    nan "^2.14.2"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.4:
   version "0.4.24"
@@ -732,6 +759,11 @@ mute-stream@~0.0.4:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
+
+nan@^2.14.2:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
+  integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
 
 needle@2.4.0:
   version "2.4.0"
