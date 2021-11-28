@@ -18,41 +18,46 @@ const sequelize = new Sequelize(
 );
 
 const homeIP = process.env.HOME_IP;
+const serverIP = "http://104.131.30.210";
 
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
 const isProd = process.env.NODE_ENV === "production";
 console.log("isProd", isProd);
 
-const origins = ["http://104.131.30.210"].concat(
-  !isProd
-    ? ["http://localhost:3000", "http://localhost:5151"]
-    : [homeIP]
-);
+const localOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5151",
+  "http://localhost:8080",
+  homeIP,
+];
+const postOrigins = [serverIP].concat(!isProd ? localOrigins : [homeIP]);
+
+const getOrigins = localOrigins.concat([serverIP]);
 
 console.log("origins", origins);
 
-const corsOptions = {
-  origin: origins,
+const getOptions = {
+  origin: getOrigins,
 };
+
+const postOptions = { origin: postOrigins };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get("/readings", async (req, res) => {
+app.get("/readings", cors(getOptions), async (req, res) => {
   const readings = await Reading.findAll();
   res.send(readings);
 });
 
-app.post("/readings", async (req, res) => {
+app.post("/readings", cors(postOptions), async (req, res) => {
   const { body } = req;
   const { temperature, humidity, pressure } = body;
   if (!temperature || !humidity || !pressure) {
-    res
-      .status(400)
-      .send({
-        message: "temperature, humidity, and pressure attributes are required.",
-      });
+    res.status(400).send({
+      message: "temperature, humidity, and pressure attributes are required.",
+    });
     return;
   }
 
