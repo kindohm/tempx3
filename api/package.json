@@ -17,8 +17,8 @@
   },
   "scripts": {
     "start": "yarn run migrate && nodemon index.js",
-    "deploy": "yarn && yarn run migrate:server && NODE_ENV=production pm2 start index.js --name api --update-env",
-    "deploy:update": "yarn && yarn run migrate:server && NODE_ENV=production pm2 restart api --update-env",
+    "deploy": "yarn && yarn run migrate:server && NODE_ENV=production && pm2 start index.js --name api --update-env",
+    "deploy:update": "yarn && yarn run migrate:server && NODE_ENV=production && pm2 restart api --update-env",
     "deploy:stop": "yarn pm2 stop api && yarn pm2 delete api",
     "migrate": "yarn sequelize-cli db:migrate",
     "migrate:server": "yarn run migrate --config ~/sequelize.json"
