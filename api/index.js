@@ -19,7 +19,7 @@ const sequelize = new Sequelize(
 
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
-const isProd = process.env.NODE_DEV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 console.log('isProd', isProd);
 const origins = ['http://104.131.30.210'].concat(!isProd ? ['http://localhost:3000', 'http://localhost:5151'] : []);
 console.log('origins', origins);
