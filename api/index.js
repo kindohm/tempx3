@@ -19,8 +19,13 @@ const sequelize = new Sequelize(
 
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
+const isProd = process.env.NODE_DEV === 'production'
+console.log('isProd', isProd);
+const origins = ['http://104.131.30.210'].concat(!isProd ? ['http://localhost:3000', 'http://localhost:5151'] : []);
+console.log('origins', origins);
+
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5151', 'http://104.131.30.210']
+  origin: origins
 }
 
 app.use(cors(corsOptions));
