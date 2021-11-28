@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const cors = require('cors');
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const port = 5150;
@@ -19,14 +19,20 @@ const sequelize = new Sequelize(
 
 const Reading = readingModel(sequelize, Sequelize.DataTypes);
 
-const isProd = process.env.NODE_ENV === 'production'
-console.log('isProd', isProd);
-const origins = ['http://104.131.30.210'].concat(!isProd ? ['http://localhost:3000', 'http://localhost:5151'] : []);
-console.log('origins', origins);
+const isProd = process.env.NODE_ENV === "production";
+console.log("isProd", isProd);
+
+const origins = ["http://104.131.30.210"].concat(
+  !isProd
+    ? ["http://localhost:3000", "http://localhost:5151"]
+    : ["http://73.62.179.32"]
+);
+
+console.log("origins", origins);
 
 const corsOptions = {
-  origin: origins
-}
+  origin: origins,
+};
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -40,7 +46,11 @@ app.post("/readings", async (req, res) => {
   const { body } = req;
   const { temperature, humidity, pressure } = body;
   if (!temperature || !humidity || !pressure) {
-    res.status(400).send({message: 'temperature, humidity, and pressure attributes are required.'})
+    res
+      .status(400)
+      .send({
+        message: "temperature, humidity, and pressure attributes are required.",
+      });
     return;
   }
 
