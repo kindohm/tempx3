@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const cors = require('cors');
 const express = require("express");
 const app = express();
@@ -32,25 +33,14 @@ app.get("/readings", async (req, res) => {
 
 app.post("/readings", async (req, res) => {
   const { body } = req;
-  const { temperature } = body;
-  if (!temperature) {
-    res.status(400).send({message: 'temperature attribute is required.'})
+  const { temperature, humidity, pressure } = body;
+  if (!temperature || !humidity || !pressure) {
+    res.status(400).send({message: 'temperature, humidity, and pressure attributes are required.'})
     return;
   }
 
-  const reading = await Reading.create({ temperature });
+  const reading = await Reading.create({ temperature, humidity, pressure });
   res.json(reading);
-});
-
-app.get("/test", async (req, res) => {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-    res.send("nope");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-    res.send("error " + JSON.stringify(error));
-  }
 });
 
 app.listen(port, () => {

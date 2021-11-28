@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Reading.init(
     {
-      temperature: { type: DataTypes.INTEGER, allowNull: false },
+      temperature: { type: DataTypes.FLOAT, allowNull: false },
+      pressure: { type: DataTypes.FLOAT, allowNull: false },
+      humidity: { type: DataTypes.FLOAT, allowNull: false },
     },
     {
       sequelize,

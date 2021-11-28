@@ -10,7 +10,15 @@ module.exports = {
       },
       temperature: {
         allowNull:false,
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
+      },
+      pressure: {
+        allowNull:false,
+        type: Sequelize.FLOAT
+      },
+      humidity: {
+        allowNull:false,
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull:false,
