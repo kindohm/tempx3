@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <div x-data="{ open: false }">
-      <button @click="open = true">Expand</button>
-
-      <span x-show="open"> Content... </span>
+    <div x-data="readingData()" x-init="fetchReadings()">
+      <p x-show="isLoading">Loading...</p>
+      <ul x-show="!isLoading">
+        <template x-for="reading in readings">
+          <li>
+            <h3 x-text="reading.createdAt"></h3>
+              <span>Temperature:</span><span x-text="reading.temperature"></span><br/>
+              <span>Humidity:</span><span x-text="reading.humidity"></span> <br/>
+              <span>Pressure:</span><span x-text="reading.pressure"></span> <br/>
+          </li>
+        </template>
+      </ul>
     </div>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script>
-      fetch("http://104.131.30.210/api/readings")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      const readingData = () => {
+        return {
+          isLoading: true,
+          readings: [],
+          fetchReadings() {
+            fetch("http://104.131.30.210/api/readings")
+              .then((response) => response.json())
+              .then((data) => {
+                this.isLoading = false;
+                this.readings = data;
+              });
+          },
+        };
+      };
     </script>
   </body>
 </html>
