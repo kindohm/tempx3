@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <div x-data="{ open: false }">
+      <button @click="open = true">Expand</button>
+
+      <span x-show="open"> Content... </span>
+    </div>
+    <script>
+      fetch("http://104.131.30.210/api/readings")
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    </script>
+  </body>
+</html>
