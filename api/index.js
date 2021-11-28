@@ -35,7 +35,7 @@ const postOrigins = [serverIP].concat(!isProd ? localOrigins : [homeIP]);
 
 const getOrigins = localOrigins.concat([serverIP]);
 
-console.log("origins", origins);
+console.log("origins", getOrigins, postOrigins);
 
 const getOptions = {
   origin: getOrigins,
