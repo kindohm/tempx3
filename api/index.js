@@ -44,11 +44,10 @@ const getOptions = {
 
 const postOptions = { origin: postOrigins };
 
-//app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/readings", cors(getOptions), async (req, res) => {
-  const readings = await Reading.findAll();
+  const readings = await Reading.findAll({order: [["createdAt", "DESC"]], limit: 50});
   res.send(readings);
 });
 
