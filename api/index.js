@@ -43,7 +43,7 @@ const getOptions = {
 
 const postOptions = { origin: postOrigins };
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/readings", cors(getOptions), async (req, res) => {
