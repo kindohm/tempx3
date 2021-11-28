@@ -17,6 +17,7 @@ const sequelize = new Sequelize(
   }
 );
 
+
 const homeIP = process.env.HOME_IP;
 const serverIP = "http://104.131.30.210";
 
