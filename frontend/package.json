@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "yarn http-server",
-    "deploy": "yarn && REACT_APP_API_URL=http://104.131.30.210/api react-scripts build && pm2 start \"http-server build -p 5151\" --name frontend",
-    "deploy:update": "yarn && REACT_APP_API_URL=http://104.131.30.210/api react-scripts build && yarn pm2 restart frontend"
+    "deploy": "yarn && pm2 start \"http-server -p 5151\" --name frontend",
+    "deploy:update": "yarn && yarn pm2 restart frontend"
   }
 }
