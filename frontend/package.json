@@ -8,6 +8,6 @@
   "scripts": {
     "start": "yarn http-server",
     "deploy": "yarn && pm2 start \"http-server -p 5151\" --name frontend",
-    "deploy:update": "yarn && yarn pm2 restart frontend"
+    "deploy:update": "yarn && pm2 restart frontend"
   }
 }
