@@ -62,19 +62,21 @@
                   const farenheit = (celcius * 9) / 5 + 32;
                   return {
                     celcius,
+                    farenheit,
                     temperatureDisplay: `${celcius.toFixed(
                       1
                     )} °C / ${farenheit.toFixed(1)} °F`,
                     humidityDisplay: `${humidity.toFixed(1)}%`,
                     dateDisplay: `${dt.toLocaleDateString()} ${dt.toLocaleTimeString()}`,
+                    hour: dt.toLocaleTimeString(),
                     pressureDisplay: `${pressure.toFixed(1)} hPa`,
                   };
                 });
 
                 const chartsData = mapped.reduce((acc, next, i) => {
 
-                  acc.temperatureChartData.labels.unshift('');
-                  acc.temperatureChartData.data.unshift(next.celcius);
+                  acc.temperatureChartData.labels.unshift(next.hour);
+                  acc.temperatureChartData.data.unshift(next.farenheit);
                   return acc;
                 }, {
                   temperatureChartData: {labels: [], data: []}
