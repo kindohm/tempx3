@@ -40,7 +40,7 @@
           <table class="table" x-cloak x-show="!isLoading">
             <tr>
               <th>Date</th>
-              <th>Temperature</th>
+              <th>Temp</th>
               <th>Humidity</th>
               <th>Pressure</th>
             </tr>
@@ -81,9 +81,7 @@
                     farenheit,
                     humidity,
                     pressure,
-                    temperatureDisplay: `${celcius.toFixed(
-                      1
-                    )} °C / ${farenheit.toFixed(1)} °F`,
+                    temperatureDisplay: `${farenheit.toFixed(1)} °F`,
                     humidityDisplay: `${humidity.toFixed(1)}%`,
                     dateDisplay: `${dt.toLocaleDateString()} ${dt.toLocaleTimeString()}`,
                     hour: dt.toLocaleTimeString(),
