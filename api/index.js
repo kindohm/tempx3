@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const ONE_DAY = 24 * 60 * 60 * 1000;
+
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -46,8 +48,7 @@ const postOptions = { origin: postOrigins };
 app.use(express.json());
 
 app.get("/readings", cors(getOptions), async (req, res) => {
-  const yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
-  console.log('yesterday', yesterday);
+  const yesterday = new Date(new Date().getTime() - ONE_DAY);
 
   const readings = await Reading.findAll({
     where: { createdAt: { [Op.gte]: yesterday } },
@@ -55,8 +56,6 @@ app.get("/readings", cors(getOptions), async (req, res) => {
     limit: 50,
   });
 
-  console.log('first', readings[0]);
-  console.log('last', readings[readings.length-1])
   res.send(readings);
 });
 
