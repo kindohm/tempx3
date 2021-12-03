@@ -13,6 +13,9 @@
       [x-cloak] {
         display: none !important;
       }
+      .table-condensed{
+  font-size: 10px;
+}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -28,10 +31,22 @@
       <div class="row">
         <div class="col">
           <p>
-            Last 24 hours shown. Readings are recorded every hour from a
-            280BME sensor running on a Raspberry Pi.
+            Last 24 hours shown. Readings are recorded every hour from a 280BME
+            sensor running on a Raspberry Pi.
           </p>
           <p x-show="isLoading">Loading...</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <canvas id="temperatureChart"></canvas>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <canvas id="humidityChart"></canvas>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <canvas id="pressureChart"></canvas>
         </div>
       </div>
 
@@ -53,11 +68,6 @@
               </tr>
             </template>
           </table>
-        </div>
-        <div class="col-3">
-          <canvas id="temperatureChart"></canvas>
-          <canvas id="humidityChart"></canvas>
-          <canvas id="pressureChart"></canvas>
         </div>
       </div>
     </div>
@@ -81,9 +91,9 @@
                     farenheit,
                     humidity,
                     pressure,
-                    temperatureDisplay: `${farenheit.toFixed(1)} °F`,
+                    temperatureDisplay: `${farenheit.toFixed(0)} °F`,
                     humidityDisplay: `${humidity.toFixed(1)}%`,
-                    dateDisplay: `${dt.toLocaleDateString()} ${dt.toLocaleTimeString()}`,
+                    dateDisplay: `${dt.toLocaleTimeString()}`,
                     hour: dt.toLocaleTimeString(),
                     pressureDisplay: `${pressure.toFixed(1)} hPa`,
                   };
