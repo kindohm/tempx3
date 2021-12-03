@@ -47,6 +47,8 @@ app.use(express.json());
 
 app.get("/readings", cors(getOptions), async (req, res) => {
   const yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+  console.log('yesterday', yesterday);
+  
   const readings = await Reading.findAll({
     shere: { createdAt: { [Op.gte]: yesterday } },
     order: [["createdAt", "DESC"]],

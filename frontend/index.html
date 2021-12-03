@@ -19,33 +19,47 @@
   </head>
   <body>
     <div class="container" x-data="readingData()" x-init="fetchReadings()">
-      <h3>Hank's Weather Station</h3>
-      <p>
-        Last 50 readings shown. Readings are recorded every hour from a 280BME
-        sensor running on a Raspberry Pi.
-      </p>
-      <p x-show="isLoading">Loading...</p>
+      <div class="row">
+        <div class="col">
+          <h3>Hank's Weather Station</h3>
+        </div>
+      </div>
 
-      <canvas id="temperatureChart"></canvas>
-      <canvas id="humidityChart"></canvas>
-      <canvas id="pressureChart"></canvas>
+      <div class="row">
+        <div class="col">
+          <p>
+            Last 24 hours shown. Readings are recorded every hour from a
+            280BME sensor running on a Raspberry Pi.
+          </p>
+          <p x-show="isLoading">Loading...</p>
+        </div>
+      </div>
 
-      <table class="table" x-cloak x-show="!isLoading">
-        <tr>
-          <th>Date</th>
-          <th>Temperature</th>
-          <th>Humidity</th>
-          <th>Pressure</th>
-        </tr>
-        <template x-for="reading in readings">
-          <tr>
-            <td x-text="reading.dateDisplay"></td>
-            <td x-text="reading.temperatureDisplay"></td>
-            <td x-text="reading.humidityDisplay"></td>
-            <td x-text="reading.pressureDisplay"></td>
-          </tr>
-        </template>
-      </table>
+      <div class="row">
+        <div class="col">
+          <table class="table" x-cloak x-show="!isLoading">
+            <tr>
+              <th>Date</th>
+              <th>Temperature</th>
+              <th>Humidity</th>
+              <th>Pressure</th>
+            </tr>
+            <template x-for="reading in readings">
+              <tr>
+                <td x-text="reading.dateDisplay"></td>
+                <td x-text="reading.temperatureDisplay"></td>
+                <td x-text="reading.humidityDisplay"></td>
+                <td x-text="reading.pressureDisplay"></td>
+              </tr>
+            </template>
+          </table>
+        </div>
+        <div class="col-3">
+          <canvas id="temperatureChart"></canvas>
+          <canvas id="humidityChart"></canvas>
+          <canvas id="pressureChart"></canvas>
+        </div>
+      </div>
     </div>
     <script>
       const readingData = () => {
