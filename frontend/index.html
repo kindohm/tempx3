@@ -27,6 +27,8 @@
       <p x-show="isLoading">Loading...</p>
 
       <canvas id="temperatureChart"></canvas>
+      <canvas id="humidityChart"></canvas>
+      <canvas id="pressureChart"></canvas>
 
       <table class="table" x-cloak x-show="!isLoading">
         <tr>
@@ -63,6 +65,8 @@
                   return {
                     celcius,
                     farenheit,
+                    humidity,
+                    pressure,
                     temperatureDisplay: `${celcius.toFixed(
                       1
                     )} °C / ${farenheit.toFixed(1)} °F`,
@@ -73,52 +77,83 @@
                   };
                 });
 
-                const chartsData = mapped.reduce((acc, next, i) => {
-
-                  acc.temperatureChartData.labels.unshift(next.hour);
-                  acc.temperatureChartData.data.unshift(next.farenheit);
-                  return acc;
-                }, {
-                  temperatureChartData: {labels: [], data: []}
-                });
-
                 this.readings = mapped;
                 this.isLoading = false;
-                this.renderCharts(chartsData);
+                this.renderCharts();
               });
           },
-          renderCharts(chartsData) {
-            let ctx = document
-              .getElementById("temperatureChart")
-              .getContext("2d");
+          renderCharts() {
+            const reversed = [...this.readings].reverse();
+            this.renderTemperatureChart(reversed);
+            this.renderHumidityChart(reversed);
+            this.renderPressureChart(reversed);
+          },
+          renderChart({ canvasId, lineColor, title, data, labels }) {
+            const ctx = document.getElementById(canvasId).getContext("2d");
 
-            let data = chartsData.temperatureChartData.data;
-            let labels = chartsData.temperatureChartData.labels;
-
-            let chart = new Chart(ctx, {
+            return new Chart(ctx, {
               type: "line",
               data: {
                 labels,
                 datasets: [
                   {
                     label: "",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    borderColor: "rgba(255, 0, 255, 1)",
-                    pointBackgroundColor: "rgba(255, 255, 0, 1)",
+                    borderColor: lineColor,
                     data,
+                    cubicInterpolationMode: "monotone",
+                    tension: 0.4,
+                    pointRadius: 0,
                   },
                 ],
               },
-              layout: {
-                padding: {
-                  right: 10,
-                },
-              },
               options: {
-                legend: {
-                  display: false,
+                responsive: true,
+                plugins: {
+                  title: { display: true, position: "top", text: title },
+                  legend: { display: false, position: "bottom" },
+                },
+                scales: {
+                  x: {
+                    display: false,
+                    grid: {
+                      display: false,
+                    },
+                  },
                 },
               },
+            });
+          },
+          renderTemperatureChart(rawData) {
+            const data = rawData.map((row) => row.farenheit);
+            const labels = rawData.map((row) => row.hour);
+            this.renderChart({
+              canvasId: "temperatureChart",
+              lineColor: "rgba(100,100,255,1)",
+              title: "Temperature",
+              data,
+              labels,
+            });
+          },
+          renderHumidityChart(rawData) {
+            const data = rawData.map((row) => row.humidity);
+            const labels = rawData.map((row) => row.hour);
+            this.renderChart({
+              canvasId: "humidityChart",
+              lineColor: "rgba(100,255,100,1)",
+              title: "Humidity",
+              data,
+              labels,
+            });
+          },
+          renderPressureChart(rawData) {
+            const data = rawData.map((row) => row.pressure);
+            const labels = rawData.map((row) => row.hour);
+            this.renderChart({
+              canvasId: "pressureChart",
+              lineColor: "rgba(255,100,100,1)",
+              title: "Pressure",
+              data,
+              labels,
             });
           },
         };
