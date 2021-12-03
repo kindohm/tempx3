@@ -4,7 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const port = 5150;
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const readingModel = require("./models/reading");
 
 const sequelize = new Sequelize(
@@ -16,7 +16,6 @@ const sequelize = new Sequelize(
     dialect: "mysql",
   }
 );
-
 
 const homeIP = process.env.HOME_IP;
 const serverIP = "http://104.131.30.210";
@@ -47,7 +46,12 @@ const postOptions = { origin: postOrigins };
 app.use(express.json());
 
 app.get("/readings", cors(getOptions), async (req, res) => {
-  const readings = await Reading.findAll({order: [["createdAt", "DESC"]], limit: 50});
+  const yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+  const readings = await Reading.findAll({
+    shere: { createdAt: { [Op.gte]: yesterday } },
+    order: [["createdAt", "DESC"]],
+    limit: 50,
+  });
   res.send(readings);
 });
 
