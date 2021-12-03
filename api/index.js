@@ -50,7 +50,7 @@ app.get("/readings", cors(getOptions), async (req, res) => {
   console.log('yesterday', yesterday);
 
   const readings = await Reading.findAll({
-    shere: { createdAt: { [Op.gte]: yesterday } },
+    where: { createdAt: { [Op.gte]: yesterday } },
     order: [["createdAt", "DESC"]],
     limit: 50,
   });
